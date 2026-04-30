@@ -1,0 +1,39 @@
+[user]
+name = Yazan Agha-Schrader
+email = mountaiin@icloud.com
+
+[alias]
+st = status
+sw = switch
+co = checkout             # "g co main" instead of "git checkout main"
+cm = commit -v            # "g cm" to commit something
+amend = commit --amend    # when you want to add more changes to the current commit
+reword = commit --amend   # to change commit message of the last commit you did
+undo = reset --soft HEAD^ # to, well, undo the commit (without resetting changes)
+df = diff --color-words   # to see inline changes
+mg = merge --no-ff        # merge with explicit merge commit
+hist = log --pretty=format:'%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]' --graph --date=short # pretty history viewer with ascii-art branches, merging, etc
+
+[color]
+ui = always
+
+[includeIf "gitdir:~/Projects/project-gh-page-waragdawali"]
+path = ~/.gitconfig.waragdawali
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+[lfs "customtransfer.xet"]
+	path = git-xet
+	args = transfer
+	concurrent = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[core]
+	excludesfile = ~/.gitignore_global

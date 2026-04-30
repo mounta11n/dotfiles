@@ -1,0 +1,150 @@
+export ZSH="$HOME/.oh-my-zsh"
+
+
+
+# ————————[ Essential Paths ]—————————————————————
+export PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
+# export PATH="$HOME/.cargo/bin:$PATH"  # removed - managed by mise
+#/opt/homebrew/opt/ccache/libexec:/opt/homebrew/opt/openjdk/bin:
+#export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+#export PATH="$PATH:/Users/yazan/.lmstudio/bin"
+
+
+
+# ————————[ Essential Paths ]—————————————————————
+#export PATH="/opt/homebrew/opt/expat/bin:$PATH"
+
+#If you need to have cyrus-sasl first in your PATH, run:
+#export PATH="/opt/homebrew/opt/cyrus-sasl/sbin:$PATH"
+
+#For compilers to find expat you may need to set:
+#export LDFLAGS="-L/opt/homebrew/opt/expat/lib"
+#export CPPFLAGS="-I/opt/homebrew/opt/expat/include"
+
+#For pkgconf to find expat you may need to set:
+#export PKG_CONFIG_PATH="/opt/homebrew/opt/expat/lib/pkgconfig"
+
+#For cmake to find expat you may need to set:
+#export CMAKE_PREFIX_PATH="/opt/homebrew/opt/expat"
+
+#==> cyrus-sasl
+#cyrus-sasl is keg-only, which means it was not symlinked into /opt/homebrew,
+#because macOS already provides this software and installing another version in
+#parallel can cause all kinds of trouble.
+
+#For compilers to find cyrus-sasl you may need to set:
+#export LDFLAGS="-L/opt/homebrew/opt/cyrus-sasl/lib"
+#export CPPFLAGS="-I/opt/homebrew/opt/cyrus-sasl/include"
+
+#For pkgconf to find cyrus-sasl you may need to set:
+#export PKG_CONFIG_PATH="/opt/homebrew/opt/cyrus-sasl/lib/pkgconfig"
+
+
+
+# ————————[ Additional Paths ]————————————————————
+export VIBE_HOME="$HOME/.vibe"
+export XDG_CONFIG_HOME="$HOME/.config"
+export GOPATH="$HOME/.go"
+path=('/Users/yazan/.juliaup/bin' $path)
+export PATH
+
+
+
+# ————————[ My Custom Paths ]—————————————————————
+export MY_DOT_FILES_PATH="$HOME/.config/shell"
+export MY_ALIASES_PATH="$MY_DOT_FILES_PATH/aliases.d"
+export MY_VAULT_PATH="$HOME/.local/share/secrets/vault.sh"
+#export LLAMA_ARG_MODELS_DIR="$HOME/models/llm"
+export MY_LLAMA_PATH="$HOME/opt/homebrew/bin"
+export MY_WHISPER_PATH="$HOME/models/stt/whisper-vanilla"
+export MY_LLM_MODELS_PATH="$HOME/models/llm"
+export MY_STT_MODELS_PATH="$HOME/models/stt"
+export MY_TTS_MODELS_PATH="$HOME/models/tts"
+
+
+
+# ————————[ Additional Flagss ]———————————————————
+export ARCHFLAGS="-arch $(uname -m)"
+export EDITOR='nvim'
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include -I/usr/local/include"
+export LDFLAGS="-L/usr/local/lib"
+
+
+
+# ————————[ Additional Options ]——————————————————
+#export MANPATH="/usr/local/man:$MANPATH"
+#export LANG=de_DE.UTF-8
+#export BORE_SERVER='bore.pub'
+#export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
+
+# export HOMEBREW_CASK_OPTS="--no-quarantine"
+export HOMEBREW_NO_ENV_HINTS=false
+export HOMEBREW_UPGRADE_GREEDY=false
+export HOMEBREW_NO_SORBET_RUNTIME=1
+
+export HF_HUB_DISABLE_TELEMETRY=true
+export HF_XET_HIGH_PERFORMANCE=true
+
+
+
+
+# ————————[ OMZ Plugins ]—————————————————————————
+plugins=()
+
+
+
+# ————————[ Sourcing Files ]——————————————————————
+# nice themes: bira, blinks, bureau, duellj, fino
+#ZSH_THEME="bira-plus"
+
+source "$ZSH/oh-my-zsh.sh"
+
+source "$MY_DOT_FILES_PATH/completions.d/llama-completion.bash"
+
+source "$MY_DOT_FILES_PATH/aliases.d/aliases.sh"
+source "$MY_DOT_FILES_PATH/aliases.d/aliases-brew.sh"
+source "$MY_DOT_FILES_PATH/aliases.d/aliases-ls-lsd.sh"
+source "$MY_DOT_FILES_PATH/aliases.d/aliases-chezmoi.sh"
+source "$MY_DOT_FILES_PATH/aliases.d/aliases-sudos.sh"
+
+source "$MY_DOT_FILES_PATH/functions.sh"
+source "$MY_VAULT_PATH"
+
+# Aliases can be placed here, though Oh My Zsh
+# define aliases within a top-level file in $ZSH_CUSTOM
+# folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+
+
+export OLDPWD=/Users/yazan/_conda
+
+# ————————[ Shell Integrations ]——————————————————
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+
+# mise für alles außer Python
+eval "$(/Users/yazan/.local/bin/mise activate zsh)"
+# timing, in case vivid was installed by mise
+export LS_COLORS="$(vivid generate lava)"
+
+
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/Users/yazan/.local/share/mise/installs/micromamba/latest/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/Users/yazan/.mamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+
+
+
+# Starship IMMER als letztes
+eval "$(starship init zsh)"

@@ -1,0 +1,512 @@
+
+" --------------------------------------------------
+" --------------------------------------------------
+"
+"                    .
+"    ##############..... ##############
+"    ##############......##############
+"      ##########..........##########
+"      ##########........##########
+"      ##########.......##########
+"      ##########.....##########..
+"      ##########....##########.....
+"    ..##########..##########.........
+"  ....##########.#####++++.............
+"    ..###############+YZN............
+"      ################.............
+"      ##############.YZN.3333333333
+"      ############...YZ...55..55  55
+"      ##########....YZ...55..55  55
+"      ########......YZN..888 888 888
+"      ######    .........
+"                  .....
+"                    .
+"
+" --------------------------------------------------
+" --------------------------------------------------
+
+
+
+
+
+" --------------------------------------------------
+" vim-plug plugins
+" --------------------------------------------------
+call plug#begin('~/.vim/plugged')
+Plug 'ggml-org/llama.vim'
+"Plug 'Exafunction/codeium.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
+Plug 'makerj/vim-pdf'
+Plug 'justinmk/vim-sneak'
+Plug 'joeytwiddle/sexy_scroller.vim'
+"Plug 'wakatime/vim-wakatime'
+"Plug 'freitass/todo.txt-vim'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'mhinz/vim-startify'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'dense-analysis/ale'
+Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+            \ Plug 'ryanoasis/vim-devicons' |
+            \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+call plug#end()
+
+
+
+
+
+" --------------------------------------------------
+" custom ui and ux configs
+" --------------------------------------------------
+set encoding=UTF-8
+set number
+set mouse=a
+set autoindent
+set shiftwidth=2
+set expandtab
+set softtabstop=2
+set tabstop=2
+syntax on
+filetype plugin on
+"
+set laststatus=2
+set showtabline=2
+set noshowmode
+"
+if !has('gui_running')
+  set t_Co=256
+endif
+"
+set hlsearch
+highlight Search cterm=NONE ctermbg=yellow ctermfg=black
+
+let $PATH = $HOME . '/.local/share/mise/shims:' . $PATH
+
+
+
+
+" --------------------------------------------------
+" custom keybindings
+" --------------------------------------------------
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+nnoremap <leader>tr :terminal<CR>
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'Exafunction/codeium.vim'
+" --------------------------------------------------
+"let g:codeium_os = 'linux'
+"let g:codeium_arch = 'x86_64'
+"let g:codeium_idle_delay = 25
+"let g:codeium_render = v:true
+"let g:codeium_enabled = v:true
+"let g:codeium_disable_bindings = 1
+
+"" disable all and use whitelist
+"let g:codeium_filetypes_disabled_by_default = v:true
+"let g:codeium_filetypes = {
+    "\ 'bash':       v:true,
+    "\ }
+
+"" enable all and use a blacklist
+"let g:codeium_filetypes_disabled_by_default = v:false
+"let g:codeium_filetypes = {
+    "\ 'markdown':  v:false,
+    "\ 'plaintext': v:false,
+    "\ }
+
+""  AcceptNextLine() & AcceptNextWord() not working currently
+"imap <script><silent><nowait><expr> <M-Tab> codeium#AcceptNextWord()
+"imap <script><silent><nowait><expr> <C-M-Tab> codeium#AcceptNextLine()
+"imap <S-Tab>     <Cmd>call codeium#CycleCompletions(1)<CR>
+"imap <C-S-Tab>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+
+"" For just disabling automatic triggering of completions
+"" use `CycleOrComplete()` instead of `CycleCompletions(1)`.
+"let g:codeium_manual = v:true
+"imap  <script> <silent><nowait><expr> <Tab> codeium#Accept()
+"imap  <C-Tab>  <Cmd>call codeium#CycleOrComplete()<CR>
+"imap  <C-x>    <Cmd>call codeium#Clear()<CR>
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'junegunn/fzf',
+" --------------------------------------------------
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'joeytwiddle/sexy_scroller.vim'
+" --------------------------------------------------
+let g:SexyScroller_MinLines   = 50
+let g:SexyScroller_MinColumns = 200
+
+
+
+
+
+" --------------------------------------------------
+" Plug freitass/todo.txt-vim
+" --------------------------------------------------
+" Use todo#Complete as the omni complete function for todo files
+"au filetype todo setlocal omnifunc=todo#Complete
+" Auto complete projects
+"au filetype todo imap <buffer> + +<C-X><C-O>
+" Auto complete contexts
+"au filetype todo imap <buffer> @ @<C-X><C-O>
+"autocmd BufRead,BufNewFile */todo.txt set filetype=todo
+" todo.txt colors
+"highlight TodoDone       ctermfg=DarkGray
+"highlight TodoPriorityA  ctermfg=Red
+"highlight TodoPriorityB  ctermfg=Yellow
+"highlight TodoPriorityC  ctermfg=Yellow
+"highlight TodoDate       ctermfg=Magenta
+"highlight TodoProject    ctermfg=Cyan
+"highlight TodoContext    ctermfg=Blue
+" todo.txt keybindings
+"nnoremap &lt;leader&gt;s :sort&lt;CR&gt;
+"nnoremap &lt;leader&gt;c :call todo#txt#mark_as_done()&lt;CR&gt;
+"nnoremap &lt;leader&gt;d :call todo#txt#set_date()&lt;CR&gt;
+
+
+
+
+
+" --------------------------------------------------
+"Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+" --------------------------------------------------
+let g:Hexokinase_highlighters = [ 'foregroundfull' ]
+"
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla',
+\     'colour_names'
+\ ]
+"
+let g:Hexokinase_ftOptInPatterns = {
+\     'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+\     'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names'
+\ }
+"
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'dense-analysis/ale'
+" --------------------------------------------------
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+  \ 'cpp': ['clang'],
+  \ 'sh': ['shellcheck'],
+  \}
+"
+"let g:ale_linters = {
+    "\ 'javascript': ['eslint'],
+    "\ 'cpp': ['clang'],
+    "\ 'sh': ['shellcheck'],
+    "\ 'awk': ['gawk'],
+    "\ 'bibtex': ['biber'],
+    "\ 'cmake': ['cmakelint'],
+    "\ 'css': ['stylelint'],
+    "\ 'cuda': ['nvcc'],
+    "\ 'dockerfile': ['hadolint'],
+    "\ 'html': ['htmlhint'],
+    "\ 'json': ['jsonlint'],
+    "\ 'latex': ['chktex'],
+    "\ 'make': ['checkmake'],
+    "\ 'markdown': ['markdownlint'],
+    "\ 'openapi': ['spectral'],
+    "\ 'toml': ['tomllint'],
+    "\ 'yaml': ['yamllint'],
+"\}
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" --------------------------------------------------
+:colorscheme dracula
+let g:vim_svelte_plugin_load_full_syntax = 1
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'justinmk/vim-sneak'
+" --------------------------------------------------
+let g:sneak#label = 1
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'vim-airline/vim-airline.vim'
+" --------------------------------------------------
+"" Automatically displays all buffers when there's only one tab open
+let g:airline_theme='sol'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+
+
+
+" --------------------------------------------------
+" Plug 'mhinz/vim-startify'
+" --------------------------------------------------
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+"
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'rbong/vim-flog.vim'
+" --------------------------------------------------
+let g:flog_default_opts = {
+            \ 'max_count': 2000,
+            \ }
+
+let g:flog_permanent_default_opts = {
+            \ 'date': 'short',
+            \ }
+
+
+
+
+" --------------------------------------------------
+" Plug 'ctrlpvim/ctrlp.vim'
+" --------------------------------------------------
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'preservim/nerdtree'
+" --------------------------------------------------
+" load in right order
+autocmd VimEnter *
+            \   if !argc()
+autocmd VimEnter * if !argc() | Startify | endif
+autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd VimEnter * if !argc() | wincmd w | endif
+"
+" fix N debug
+set sessionoptions-=blank
+let g:NERDTreeNodeDelimiter="	"
+"
+" set own keymapps
+:nmap <C-f> :NERDTreeToggle<CR>
+:imap <C-f> <ESC>:NERDTreeToggle<CR>
+"
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
+"
+" Close the tab if NERDTree is the only window remaining in it.
+"autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeNaturalSort = 1
+"let g:NERDTreeMouseMode = 2
+let g:NERDTreeMarkBookmarks = 0
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeMinimalUI = 1
+
+
+
+
+
+" --------------------------------------------------
+"            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+" --------------------------------------------------
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+"
+let g:NERDTreeGitStatusUseNerdFonts = 1
+"let g:NERDTreeGitStatusShowClean = 0
+"
+" How to show ignored status?
+" a heavy feature may cost much more time. default: 0
+"let g:NERDTreeGitStatusShowIgnored = 1
+
+
+
+
+
+" --------------------------------------------------
+"            \ Plug 'ryanoasis/vim-devicons'
+" --------------------------------------------------
+"" adding to vim-startify screen
+let g:webdevicons_enable_startify = 1
+
+"" use double-width(1) or single-width(0) glyphs
+"" only manipulates padding, has no effect on terminal or set(guifont) font
+"let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+
+"" whether or not to show the nerdtree brackets around flags
+"let g:webdevicons_conceal_nerdtree_brackets = 1
+
+"" add or override individual additional filetypes
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['gguf'] = ''
+
+
+
+
+
+" --------------------------------------------------
+"            \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" --------------------------------------------------
+
+
+
+
+
+" --------------------------------------------------
+" Plug 'liuchengxu/vim-which-key'
+" --------------------------------------------------
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+" bind 
+"
+let g:which_key_map = {}
+"
+let g:which_key_map['w'] = {
+      \ 'name' : '+windows' ,
+      \ 'w' : ['<C-W>w'     , 'other-window']          ,
+      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
+      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h' : ['<C-W>h'     , 'window-left']           ,
+      \ 'j' : ['<C-W>j'     , 'window-below']          ,
+      \ 'l' : ['<C-W>l'     , 'window-right']          ,
+      \ 'k' : ['<C-W>k'     , 'window-up']             ,
+      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J' : [':resize +5'  , 'expand-window-below']   ,
+      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K' : [':resize -5'  , 'expand-window-up']      ,
+      \ '=' : ['<C-W>='     , 'balance-window']        ,
+      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
+      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ }
+"let g:which_key_map = {}
+let g:which_key_map.t = {
+      \ 'name' : '+TOrminal' ,
+      \ 'r' : ['<leader>tr', 'Open terminal'] ,
+      \ }
+"let g:which_key_map['t'] = {
+      "\ 'name' : '+tabs' ,
+      "\ 'b' : [':tabnew'    , 'new-tab']        ,
+      "\ 'd' : [':tabclose'  , 'close-tab']      ,
+      "\ 'h' : [':tabprevious', 'tab-prev']       ,
+      "\ 'l' : [':tabnext'   , 'tab-next']       ,
+      "\ 'r' : [':term'      , 'terminal']       ,
+      "\ }
+"call which_key#register('<Space>', "g:which_key_map")
+
+
+
+
+
+" --------------------------------------------------
+" --------------------------------------------------
+"
+"                    .
+"    ##############..... ##############
+"    ##############......##############
+"      ##########..........##########
+"      ##########........##########
+"      ##########.......##########
+"      ##########.....##########..
+"      ##########....##########.....
+"    ..##########..##########.........
+"  ....##########.#####++++.............
+"    ..###############+YZN............
+"      ################.............
+"      ##############.YZN.3333333333
+"      ############...YZ...55..55  55
+"      ##########....YZ...55..55  55
+"      ########......YZN..888 888 888
+"      ######    .........
+"                  .....
+"                    .
+"
+" --------------------------------------------------
+" --------------------------------------------------

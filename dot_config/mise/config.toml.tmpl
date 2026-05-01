@@ -69,10 +69,17 @@ killport = "latest"
 portless = "latest"
 qdns = "latest"
 
+{{ if .install_hardware_tools -}}
+# ---------------------------------------------------------------------------
+# Hardware tools
+# ---------------------------------------------------------------------------
+arduino-cli = "latest"
+{{ end }}
+
+{{ if .install_misc_tools -}}
 # ---------------------------------------------------------------------------
 # Media & misc
 # ---------------------------------------------------------------------------
-arduino-cli = "latest"
 astro = "latest"
 cowsay = "latest"
 imagemagick = "latest"
@@ -81,6 +88,7 @@ oha = "latest"
 typst = "latest"
 vhs = "latest"
 yt-dlp = "latest"
+{{ end }}
 
 # ---------------------------------------------------------------------------
 # Lazy* TUI suite

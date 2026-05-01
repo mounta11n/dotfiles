@@ -1,0 +1,154 @@
+[tools]
+# ---------------------------------------------------------------------------
+# Core runtimes & languages
+# ---------------------------------------------------------------------------
+bun = "latest"
+ccache = "latest"
+cmake = "latest"
+go = "latest"
+gum = "latest"
+java = "latest"
+lua = "latest"
+luajit = "latest"
+node = "latest"
+rust = "latest"
+uv = "latest"
+perl = "latest"
+
+# ---------------------------------------------------------------------------
+# DevOps & infrastructure
+# ---------------------------------------------------------------------------
+age = "latest"
+coredns = "latest"
+hcloud = "latest"
+micromamba = "latest"
+
+# ---------------------------------------------------------------------------
+# CLI enhancements
+# ---------------------------------------------------------------------------
+bat = "latest"
+bat-extras = "latest"
+bottom = "latest"
+fd = "latest"
+fzf = "latest"
+lsd = "latest"
+ripgrep = "latest"
+starship = "latest"
+tlrc = "latest"
+usage = "latest"
+vivid = "latest"
+yazi = "latest"
+
+# ---------------------------------------------------------------------------
+# Development tools
+# ---------------------------------------------------------------------------
+ast-grep = "latest"
+gh = "latest"
+glab = "latest"
+glow = "latest"
+jq = "latest"
+mdbook = "latest"
+neovim = "latest"
+protobuf = "latest"
+shellcheck = "latest"
+tree-sitter = "latest"
+yq = "latest"
+
+# ---------------------------------------------------------------------------
+# System & network utilities
+# ---------------------------------------------------------------------------
+ctop = "latest"
+curlie = "latest"
+duf = "latest"
+dust = "latest"
+fastfetch = "latest"
+gping = "latest"
+grpcurl = "latest"
+httpie-go = "latest"
+killport = "latest"
+portless = "latest"
+qdns = "latest"
+
+# ---------------------------------------------------------------------------
+# Media & misc
+# ---------------------------------------------------------------------------
+arduino-cli = "latest"
+astro = "latest"
+cowsay = "latest"
+imagemagick = "latest"
+mermaid-ascii = "latest"
+oha = "latest"
+typst = "latest"
+vhs = "latest"
+yt-dlp = "latest"
+
+# ---------------------------------------------------------------------------
+# Lazy* TUI suite
+# ---------------------------------------------------------------------------
+lazydocker = "latest"
+lazygit = "latest"
+lazyjournal = "latest"
+lazyssh = "latest"
+
+{{ if eq .chezmoi.os "darwin" -}}
+# ---------------------------------------------------------------------------
+# macOS only
+# ---------------------------------------------------------------------------
+colima = "latest"
+lima = "latest"
+mas = "latest"
+tart = "latest"
+{{ end }}
+
+# ---------------------------------------------------------------------------
+# AI Agent CLIs (lightweight, useful everywhere)
+# ---------------------------------------------------------------------------
+aichat = "latest"
+claude = "latest"
+gemini-cli = "latest"
+copilot = "latest"
+opencode = "latest"
+pi = "latest"
+
+{{ if .install_local_llms -}}
+# ---------------------------------------------------------------------------
+# Local LLMs (heavy — only enable on machines with enough RAM/GPU)
+# ---------------------------------------------------------------------------
+llmfit = "latest"
+"llama.cpp" = { version = "latest", version_prefix = "b" }
+{{ end }}
+
+# ---------------------------------------------------------------------------
+# Tasks
+# ---------------------------------------------------------------------------
+[tasks."bootstrap:agents"]
+description = "Install all AI agent CLIs (mise-managed + uv-based)"
+run = '''
+# Ensure mise-managed agents are present (idempotent)
+mise install aichat claude gemini-cli copilot opencode pi 2>/dev/null || true
+
+# Install uv-based agents
+uv tool install --force kimi-cli
+uv tool install --force mistral-vibe
+'''
+
+[tasks."bootstrap:local-llms"]
+description = "Install local LLM tools (requires sufficient RAM/GPU)"
+run = '''
+mise install llmfit "llama.cpp" 2>/dev/null || true
+'''
+
+[env]
+PHI_ENV = '01123581321345589'
+
+[shell_alias]
+conda = "micromamba"
+dasist = "echo 'nice'"
+mise-install-agents = "mise run bootstrap:agents"
+
+[settings]
+idiomatic_version_file_enable_tools = ["bun", "go", "java", "node", "rust"]
+status.show_tools = true
+not_found_auto_install = true
+jobs = 4
+experimental = true

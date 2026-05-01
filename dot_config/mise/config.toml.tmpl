@@ -19,9 +19,9 @@ perl = "latest"
 # DevOps & infrastructure
 # ---------------------------------------------------------------------------
 age = "latest"
+chezmoi = "latest"
 coredns = "latest"
 hcloud = "latest"
-micromamba = "latest"
 
 # ---------------------------------------------------------------------------
 # CLI enhancements
@@ -108,20 +108,24 @@ mas = "latest"
 tart = "latest"
 {{ end }}
 
+{{ if .install_agent_tools -}}
 # ---------------------------------------------------------------------------
 # AI Agent CLIs (lightweight, useful everywhere)
 # ---------------------------------------------------------------------------
 aichat = "latest"
 claude = "latest"
-gemini-cli = "latest"
 copilot = "latest"
+crush = "latest"
+gemini-cli = "latest"
 opencode = "latest"
 pi = "latest"
+{{ end }}
 
-{{ if .install_local_llms -}}
+{{ if .install_ml_tools -}}
 # ---------------------------------------------------------------------------
 # Local LLMs (heavy — only enable on machines with enough RAM/GPU)
 # ---------------------------------------------------------------------------
+micromamba = "latest"
 llmfit = "latest"
 "llama.cpp" = { version = "latest", version_prefix = "b" }
 {{ end }}
@@ -129,30 +133,48 @@ llmfit = "latest"
 # ---------------------------------------------------------------------------
 # Tasks
 # ---------------------------------------------------------------------------
-[tasks."bootstrap:agents"]
-description = "Install all AI agent CLIs (mise-managed + uv-based)"
+
+[tasks."bootstrap:agent-tools"]
+description = "Install all AI agent CLIs (mise-managed + uv-based + bun-based)"
 run = '''
 # Ensure mise-managed agents are present (idempotent)
-mise install aichat claude gemini-cli copilot opencode pi 2>/dev/null || true
+mise install aichat claude copilot crush gemini-cli opencode pi 2>/dev/null || true
 
 # Install uv-based agents
 uv tool install --force kimi-cli
 uv tool install --force mistral-vibe
+
+# Install bun-based agents
+bun install -g little-coder
 '''
 
-[tasks."bootstrap:local-llms"]
+[tasks."bootstrap:ml-tools"]
 description = "Install local LLM tools (requires sufficient RAM/GPU)"
 run = '''
-mise install llmfit "llama.cpp" 2>/dev/null || true
+mise install micromamba llmfit "llama.cpp" 2>/dev/null || true
+'''
+
+[tasks."bootstrap:misc-tools"]
+description = "Install more useful and funny stuff"
+run = '''
+mise install astro cowsay imagemagick mermaid-ascii oha typst vhs yt-dlp 2>/dev/null || true
+'''
+
+[tasks."bootstrap:hardware-tools"]
+description = "Install arduino, esp32, rpi, etc. stuff"
+run = '''
+mise install arduino-cli 2>/dev/null || true
 '''
 
 [env]
-PHI_ENV = '01123581321345589'
+TEST_PHI_ENV = '01123581321345589'
 
 [shell_alias]
 conda = "micromamba"
-dasist = "echo 'nice'"
-mise-install-agents = "mise run bootstrap:agents"
+install-agent-tools = "mise run bootstrap:agent-tools"
+install-ml-tools = "mise run bootstrap:ml-tools"
+install-misc-tools = "mise run bootstrap:misc-tools"
+install-hardware-tools = "mise run bootstrap:hardware-tools"
 
 [settings]
 idiomatic_version_file_enable_tools = ["bun", "go", "java", "node", "rust"]

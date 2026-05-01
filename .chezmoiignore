@@ -1,2 +1,6 @@
 # macOS Finder metadata — immer wieder neu erstellt, nicht versionieren
 .DS_Store
+
+# Repo-only files (not dotfiles)
+README.md
+install.sh

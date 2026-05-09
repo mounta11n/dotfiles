@@ -179,14 +179,14 @@ fi
 sleep 1
 
 # ---------------------------------------------------------------------------
-# 6. Install chezmoi via mise
+# 6. Install chezmoi via script
 # ---------------------------------------------------------------------------
-step "Installing chezmoi via mise..."
+step "Installing chezmoi via shell-script..."
 sleep 1
 
-info "Running: mise use -g chezmoi"
-mise use -g chezmoi
-ok "chezmoi installed via mise"
+info "Downloading the script and installing chezmoi..."
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
+ok "chezmoi installed"
 sleep 1
 
 # ---------------------------------------------------------------------------
@@ -281,33 +281,33 @@ sleep 1
 # ---------------------------------------------------------------------------
 # 9. Install core tool groups via mise tasks
 # ---------------------------------------------------------------------------
-step "Installing core tool groups..."
-sleep 1
+#step "Installing core tool groups..."
+#sleep 1
 
-info "This may take a while on first run. Grab a coffee ☕"
-sleep 1
+#info "This may take a while on first run. Grab a coffee ☕"
+#sleep 1
 
-info "Installing core runtimes & languages..."
-mise run runtime-tools || warn "runtime-tools had some failures — check mise status"
+#info "Installing core runtimes & languages..."
+#mise run runtime-tools || warn "runtime-tools had some failures — check mise status"
 
-info "Installing dev tools..."
-mise run dev-tools || warn "dev-tools had some failures"
+#info "Installing dev tools..."
+#mise run dev-tools || warn "dev-tools had some failures"
 
-info "Installing CLI enhancements..."
-mise run cli-tools || warn "cli-tools had some failures"
+#info "Installing CLI enhancements..."
+#mise run cli-tools || warn "cli-tools had some failures"
 
-info "Installing system & network utilities..."
-mise run system-tools || warn "system-tools had some failures"
+#info "Installing system & network utilities..."
+#mise run system-tools || warn "system-tools had some failures"
 
-info "Installing Lazy* TUI suite..."
-mise run lazy-tools || warn "lazy-tools had some failures"
+#info "Installing Lazy* TUI suite..."
+#mise run lazy-tools || warn "lazy-tools had some failures"
 
 if [ "$OS" = darwin ]; then
   info "Installing macOS-specific tools..."
   mise run macos-tools || warn "macos-tools had some failures"
 fi
 
-ok "Core tool groups installed"
+#ok "Core tool groups installed"
 sleep 1
 
 # ---------------------------------------------------------------------------

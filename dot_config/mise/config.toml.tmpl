@@ -1,143 +1,48 @@
-[tools]
 # ---------------------------------------------------------------------------
-# Core runtimes & languages
+# Tasks — install tool groups on demand
 # ---------------------------------------------------------------------------
-bun = "latest"
-ccache = "latest"
-cmake = "latest"
-go = "latest"
-gum = "latest"
-java = "latest"
-lua = "latest"
-luajit = "latest"
-node = "latest"
-rust = "latest"
-uv = "latest"
-perl = "latest"
 
-# ---------------------------------------------------------------------------
-# DevOps & infrastructure
-# ---------------------------------------------------------------------------
-age = "latest"
-chezmoi = "latest"
-coredns = "latest"
-hcloud = "latest"
+[tasks."runtime-tools"]
+description = "Core runtimes & languages"
+run = '''
+mise install bun ccache cmake go gum java lua luajit node rust uv perl
+'''
 
-# ---------------------------------------------------------------------------
-# CLI enhancements
-# ---------------------------------------------------------------------------
-bat = "latest"
-bat-extras = "latest"
-bottom = "latest"
-fd = "latest"
-fzf = "latest"
-lsd = "latest"
-ripgrep = "latest"
-starship = "latest"
-tlrc = "latest"
-usage = "latest"
-vivid = "latest"
-yazi = "latest"
+[tasks."dev-tools"]
+description = "DevOps, infrastructure & development tools"
+run = '''
+mise install age ast-grep chezmoi coredns gh glab glow hcloud jq mdbook neovim protobuf shellcheck tree-sitter yq
+'''
 
-# ---------------------------------------------------------------------------
-# Development tools
-# ---------------------------------------------------------------------------
-ast-grep = "latest"
-gh = "latest"
-glab = "latest"
-glow = "latest"
-jq = "latest"
-mdbook = "latest"
-neovim = "latest"
-protobuf = "latest"
-shellcheck = "latest"
-tree-sitter = "latest"
-yq = "latest"
+[tasks."cli-tools"]
+description = "CLI enhancements (pagers, launchers, prompts)"
+run = '''
+mise install bat bat-extras bottom fd fzf lsd ripgrep starship tlrc usage vivid yazi
+'''
 
-# ---------------------------------------------------------------------------
-# System & network utilities
-# ---------------------------------------------------------------------------
-ctop = "latest"
-curlie = "latest"
-duf = "latest"
-dust = "latest"
-fastfetch = "latest"
-gping = "latest"
-grpcurl = "latest"
-httpie-go = "latest"
-killport = "latest"
-portless = "latest"
-qdns = "latest"
+[tasks."system-tools"]
+description = "System & network utilities"
+run = '''
+mise install ctop curlie duf dust fastfetch gping grpcurl httpie-go killport portless qdns
+'''
 
-{{ if .install_hardware_tools -}}
-# ---------------------------------------------------------------------------
-# Hardware tools
-# ---------------------------------------------------------------------------
-arduino-cli = "latest"
-{{ end }}
-
-{{ if .install_misc_tools -}}
-# ---------------------------------------------------------------------------
-# Media & misc
-# ---------------------------------------------------------------------------
-astro = "latest"
-cowsay = "latest"
-imagemagick = "latest"
-mermaid-ascii = "latest"
-oha = "latest"
-typst = "latest"
-vhs = "latest"
-yt-dlp = "latest"
-{{ end }}
-
-# ---------------------------------------------------------------------------
-# Lazy* TUI suite
-# ---------------------------------------------------------------------------
-lazydocker = "latest"
-lazygit = "latest"
-lazyjournal = "latest"
-lazyssh = "latest"
+[tasks."lazy-tools"]
+description = "Lazy* TUI suite (lazydocker, lazygit, lazyjournal, lazyssh)"
+run = '''
+mise install lazydocker lazygit lazyjournal lazyssh
+'''
 
 {{ if eq .chezmoi.os "darwin" -}}
-# ---------------------------------------------------------------------------
-# macOS only
-# ---------------------------------------------------------------------------
-colima = "latest"
-lima = "latest"
-mas = "latest"
-tart = "latest"
+[tasks."macos-tools"]
+description = "macOS-specific tools (colima, lima, mas, tart)"
+run = '''
+mise install colima lima mas tart
+'''
 {{ end }}
-
-{{ if .install_agent_tools -}}
-# ---------------------------------------------------------------------------
-# AI Agent CLIs (lightweight, useful everywhere)
-# ---------------------------------------------------------------------------
-aichat = "latest"
-claude = "latest"
-copilot = "latest"
-crush = "latest"
-gemini-cli = "latest"
-opencode = "latest"
-pi = "latest"
-{{ end }}
-
-{{ if .install_ml_tools -}}
-# ---------------------------------------------------------------------------
-# Local LLMs (heavy — only enable on machines with enough RAM/GPU)
-# ---------------------------------------------------------------------------
-micromamba = "latest"
-llmfit = "latest"
-"llama.cpp" = { version = "latest", version_prefix = "b" }
-{{ end }}
-
-# ---------------------------------------------------------------------------
-# Tasks
-# ---------------------------------------------------------------------------
 
 [tasks."bootstrap:agent-tools"]
 description = "Install all AI agent CLIs (mise-managed + uv-based + bun-based)"
 run = '''
-# Ensure mise-managed agents are present (idempotent)
 mise install aichat claude copilot crush gemini-cli opencode pi 2>/dev/null || true
 
 # Install uv-based agents
@@ -166,16 +71,26 @@ run = '''
 mise install arduino-cli 2>/dev/null || true
 '''
 
-[env]
-TEST_PHI_ENV = '01123581321345589'
-
+# ---------------------------------------------------------------------------
+# Shell aliases
+# ---------------------------------------------------------------------------
 [shell_alias]
-conda = "micromamba"
-install-agent-tools = "mise run bootstrap:agent-tools"
-install-ml-tools = "mise run bootstrap:ml-tools"
-install-misc-tools = "mise run bootstrap:misc-tools"
+install-runtime-tools  = "mise run runtime-tools"
+install-dev-tools      = "mise run dev-tools"
+install-cli-tools      = "mise run cli-tools"
+install-system-tools   = "mise run system-tools"
+install-lazy-tools     = "mise run lazy-tools"
+install-agent-tools    = "mise run bootstrap:agent-tools"
+install-ml-tools       = "mise run bootstrap:ml-tools"
+install-misc-tools     = "mise run bootstrap:misc-tools"
 install-hardware-tools = "mise run bootstrap:hardware-tools"
+{{ if eq .chezmoi.os "darwin" -}}
+install-macos-tools    = "mise run macos-tools"
+{{ end }}
 
+# ---------------------------------------------------------------------------
+# Settings
+# ---------------------------------------------------------------------------
 [settings]
 idiomatic_version_file_enable_tools = ["bun", "go", "java", "node", "rust"]
 status.show_tools = true

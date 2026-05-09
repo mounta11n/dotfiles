@@ -15,56 +15,9 @@ NC='\033[0m'
 
 info()  { printf "${BLUE}[INFO]${NC}  %s\n" "$*"; }
 ok()    { printf "${GREEN}[OK]${NC}    %s\n" "$*"; }
-warn()  { printf "${YELLOW}[WARN]${NC}  %s\n" "$*"; }
+warn()  { printf "${YELLOW}[WARN]${NC} %s\n" "$*"; }
 error() { printf "${RED}[ERROR]${NC} %s\n" "$*"; exit 1; }
 step()  { printf "\n${CYAN}▶ %s${NC}\n" "$*"; }
-
-# ---------------------------------------------------------------------------
-# Parse optional flags
-# ---------------------------------------------------------------------------
-INSTALL_AGENT_TOOLS=false
-INSTALL_ML_TOOLS=false
-INSTALL_HARDWARE_TOOLS=false
-INSTALL_MISC_TOOLS=false
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --agent-tools)    INSTALL_AGENT_TOOLS=true; shift ;;
-    --ml-tools)       INSTALL_ML_TOOLS=true; shift ;;
-    --hardware-tools) INSTALL_HARDWARE_TOOLS=true; shift ;;
-    --misc-tools)     INSTALL_MISC_TOOLS=true; shift ;;
-    -h|--help)
-      cat <<'HELP'
-Usage: install.sh [OPTIONS]
-
-Bootstrap mounta11n/dotfiles on a fresh system.
-
-Options:
-  --agent-tools     Include AI agent CLIs (aichat, claude, copilot, crush,
-                    gemini-cli, opencode, pi)
-  --ml-tools        Include ML / local LLM tools (micromamba, llmfit, llama.cpp)
-  --hardware-tools  Include hardware tools (arduino-cli)
-  --misc-tools      Include media & misc tools (astro, cowsay, imagemagick,
-                    mermaid-ascii, oha, typst, vhs, yt-dlp)
-  -h, --help        Show this help message
-
-Examples:
-  # Default (core tools only)
-  curl -fsSL https://raw.githubusercontent.com/mounta11n/dotfiles/main/install.sh | bash
-
-  # With optional tool groups
-  curl -fsSL ... | bash -s -- --agent-tools --misc-tools
-
-  # Everything
-  curl -fsSL ... | bash -s -- --agent-tools --ml-tools --hardware-tools --misc-tools
-HELP
-      exit 0
-      ;;
-    *)
-      error "Unknown option: $1 (use --help for usage)"
-      ;;
-  esac
-done
 
 detect_os() {
   case "$(uname -s)" in
@@ -217,21 +170,11 @@ mkdir -p "$CHEZMOI_CONFIG_DIR"
 mkdir -p "$CHEZMOI_CONFIG_DIR/age"
 
 if [ -f "$CHEZMOI_CONFIG_DIR/chezmoi.toml" ]; then
-  warn "chezmoi.toml already exists — skipping data variables setup"
-  warn "If you want to change options, edit $CHEZMOI_CONFIG_DIR/chezmoi.toml manually"
+  warn "chezmoi.toml already exists — skipping setup"
 else
-  cat > "$CHEZMOI_CONFIG_DIR/chezmoi.toml" <<EOF
-[data]
-install_agent_tools = ${INSTALL_AGENT_TOOLS}
-install_ml_tools = ${INSTALL_ML_TOOLS}
-install_hardware_tools = ${INSTALL_HARDWARE_TOOLS}
-install_misc_tools = ${INSTALL_MISC_TOOLS}
-EOF
-  ok "Created chezmoi.toml with data variables:"
-  echo "  install_agent_tools    = ${INSTALL_AGENT_TOOLS}"
-  echo "  install_ml_tools       = ${INSTALL_ML_TOOLS}"
-  echo "  install_hardware_tools = ${INSTALL_HARDWARE_TOOLS}"
-  echo "  install_misc_tools     = ${INSTALL_MISC_TOOLS}"
+  # Empty config — all tool groups are managed via mise tasks
+  touch "$CHEZMOI_CONFIG_DIR/chezmoi.toml"
+  ok "Created chezmoi.toml (empty — tool groups are managed via mise tasks)"
 fi
 sleep 1
 
@@ -336,50 +279,36 @@ ok "Dotfiles applied successfully"
 sleep 1
 
 # ---------------------------------------------------------------------------
-# 9. Post-setup: install mise-managed tools
+# 9. Install core tool groups via mise tasks
 # ---------------------------------------------------------------------------
-step "Installing all mise-managed tools..."
+step "Installing core tool groups..."
 sleep 1
 
 info "This may take a while on first run. Grab a coffee ☕"
 sleep 1
-mise install
-ok "All mise tools installed"
+
+info "Installing core runtimes & languages..."
+mise run runtime-tools || warn "runtime-tools had some failures — check mise status"
+
+info "Installing dev tools..."
+mise run dev-tools || warn "dev-tools had some failures"
+
+info "Installing CLI enhancements..."
+mise run cli-tools || warn "cli-tools had some failures"
+
+info "Installing system & network utilities..."
+mise run system-tools || warn "system-tools had some failures"
+
+info "Installing Lazy* TUI suite..."
+mise run lazy-tools || warn "lazy-tools had some failures"
+
+if [ "$OS" = darwin ]; then
+  info "Installing macOS-specific tools..."
+  mise run macos-tools || warn "macos-tools had some failures"
+fi
+
+ok "Core tool groups installed"
 sleep 1
-
-# ---------------------------------------------------------------------------
-# 10. Run bootstrap tasks
-# ---------------------------------------------------------------------------
-step "Running bootstrap tasks..."
-sleep 1
-
-if [ "$INSTALL_AGENT_TOOLS" = true ]; then
-  info "Running bootstrap:agent-tools..."
-  mise run bootstrap:agent-tools
-  ok "Agent tools bootstrapped"
-  sleep 1
-fi
-
-if [ "$INSTALL_ML_TOOLS" = true ]; then
-  info "Running bootstrap:ml-tools..."
-  mise run bootstrap:ml-tools
-  ok "ML tools bootstrapped"
-  sleep 1
-fi
-
-if [ "$INSTALL_HARDWARE_TOOLS" = true ]; then
-  info "Running bootstrap:hardware-tools..."
-  mise run bootstrap:hardware-tools
-  ok "Hardware tools bootstrapped"
-  sleep 1
-fi
-
-if [ "$INSTALL_MISC_TOOLS" = true ]; then
-  info "Running bootstrap:misc-tools..."
-  mise run bootstrap:misc-tools
-  ok "Misc tools bootstrapped"
-  sleep 1
-fi
 
 # ---------------------------------------------------------------------------
 # Done
@@ -393,9 +322,9 @@ info "Next steps:"
 echo "  • Restart your shell or run: source ~/.zshrc"
 echo "  • Run 'chezmoi doctor' to verify everything is working."
 echo ""
-info "Optional tool groups enabled this run:"
-[ "$INSTALL_AGENT_TOOLS"    = true ] && echo "    ✓ --agent-tools"
-[ "$INSTALL_ML_TOOLS"       = true ] && echo "    ✓ --ml-tools"
-[ "$INSTALL_HARDWARE_TOOLS" = true ] && echo "    ✓ --hardware-tools"
-[ "$INSTALL_MISC_TOOLS"     = true ] && echo "    ✓ --misc-tools"
+info "Optional extras you can install later via mise aliases:"
+echo "    install-agent-tools     — AI agent CLIs"
+echo "    install-ml-tools        — local LLM tools"
+echo "    install-misc-tools      — media & misc tools"
+echo "    install-hardware-tools  — arduino & hardware tools"
 echo ""

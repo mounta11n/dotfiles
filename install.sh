@@ -58,7 +58,7 @@ case "$OS" in
     info "Installing with apt..."
     export DEBIAN_FRONTEND=noninteractive
     apt-get update -qq
-    apt-get install -y -qq zsh git curl age
+    apt-get install -y -qq zsh git curl age hcloud-cli lsd bat fd-find fzf tealdeer vivid imagemagick ffmpeg jq yq vim neovim starship
     ;;
   darwin)
     info "Checking for Homebrew..."

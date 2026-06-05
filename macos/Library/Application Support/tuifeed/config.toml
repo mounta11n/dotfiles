@@ -1,0 +1,14 @@
+[sources]
+# New_York_Times = "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+
+"r/LocalLLaMA" = "https://www.reddit.com/r/LocalLLaMA/hot/.rss"
+"r/Pi" = "https://www.reddit.com/r/PiCodingAgent/hot/.rss"
+
+"Ars Technica" = "http://feeds.arstechnica.com/arstechnica/index"
+"David Walsh" = "https://davidwalsh.name/feed"
+"Flowing Data" = "https://flowingdata.com/feed"
+"Hacker News" = "https://news.ycombinator.com/rss"
+"r/Science" = "https://reddit.com/r/science/.rss"
+"Sink In Tech & Travel "= "https://gosink.in/rss/"
+
+"Hackaday" = "https://hackaday.com/blog/feed/"

@@ -1,0 +1,414 @@
+/* Red Hat Inspired Theme (Flat, High Contrast, Red/Black/White) */
+
+/* Base palette */
+:root {
+    /* Brand reds */
+    --rh-red: #ee0000;
+    --rh-red-accent: #0066cc;
+    --rh-red-weak: #b9dafc;
+
+    /* Neutrals */
+    --rh-black: #151515;
+    --rh-black-2: #292929;
+    --rh-black-3: #1f1f1f;
+    --rh-gray-1: #f2f2f2;
+    --rh-gray-2: #e0e0e0;
+    --rh-gray-3: #c7c7c7;
+    --rh-border: #383838;
+    --rh-border-dark: #a3a3a3;
+    --rh-white: #ffffff;
+
+    /* Spacing radii: sharp edges */
+    --radius-0: 0;
+
+    /* Overwrite previous fills to remove beiges/transparency bias */
+    --fill-1: rgba(0 0 0 / 0.05);
+    --fill-2: rgba(0 0 0 / 0.08);
+    --fill-3: rgba(0 0 0 / 0.12);
+
+    --color-black: var(--rh-black);
+    --color-black-soft: var(--rh-black-2);
+    --color-black-mute: var(--rh-black-3);
+
+    --color-white: var(--rh-white);
+    --color-white-soft: #f7f7f7;
+    --color-white-mute: #efefef;
+
+    --color-list-item: var(--fill-1);
+    --color-list-item-hover: var(--fill-2);
+}
+
+/* LIGHT MODE */
+body[theme-mode="light"] {
+    /* Flat white surfaces, no glass */
+    --aero-background-1: #ffffff;
+    --aero-background-2: #f2f2f2;
+    --aero-background-3: #e0e0e0;
+    --aero-background-solid: #ffffff;
+
+    --navbar-background: #f2f2f2;
+    --navbar-background-mac: #e0e0e0;
+
+    --ant-select-selector-bg: var(--aero-background-1);
+    --ant-color-bg-container: var(--aero-background-1);
+    --ant-segmented-item-selected-bg: var(--aero-background-3);
+    --ant-button-default-bg: var(--aero-background-1);
+    --ant-radio-button-bg: var(--aero-background-1);
+}
+
+/* DARK MODE */
+body[theme-mode="dark"] {
+    /* Deep dark surfaces */
+    --aero-background-1: var(--rh-black-2);
+    --aero-background-2: var(--rh-black-3);
+    --aero-background-3: var(--rh-gray-1);
+    --aero-background-solid: var(--rh-black-2);
+
+    --ant-select-selector-bg: var(--aero-background-1);
+    --ant-color-bg-container: var(--aero-background-1);
+    --ant-segmented-item-selected-bg: var(--aero-background-3);
+    --ant-button-default-bg: var(--aero-background-1);
+    --ant-radio-button-bg: var(--aero-background-1);
+}
+
+/* New window backgrounds */
+[class^="PageContainer"] {
+    background-color: var(--aero-background-solid) !important;
+}
+
+/* System background hints (reduced translucency) */
+@media (prefers-color-scheme: dark) {
+    body[theme-mode="light"] {
+        background: #ffffff;
+    }
+}
+@media (prefers-color-scheme: light) {
+    body[theme-mode="dark"] {
+        background: var(--rh-black-2);
+    }
+}
+
+/* Content areas */
+[theme-mode="light"] #content-container,
+[theme-mode="light"] .minapp-drawer .ant-drawer-body {
+    background-color: var(--aero-background-2);
+}
+[theme-mode="dark"] #content-container,
+[theme-mode="dark"] .minapp-drawer .ant-drawer-body {
+    background-color: var(--aero-background-1);
+}
+
+.home-tabs,
+[class^="ProgramSection"],
+[class^="IconSection"],
+#messages,
+[class^="SettingContainer"] {
+    background-color: transparent;
+}
+
+[class^="TopicListItem"] .menu {
+    background-color: transparent !important;
+}
+
+#inputbar,
+.system-prompt,
+[class^="CardContent"],
+[class^="ServerCard"] {
+    background-color: var(--aero-background-1);
+    border: 1px solid var(--rh-border);
+}
+[theme-mode="dark"] #inputbar,
+[theme-mode="dark"] .system-prompt,
+[theme-mode="dark"] [class^="CardContent"],
+[theme-mode="dark"] [class^="ServerCard"] {
+    border-color: var(--rh-border-dark);
+}
+
+[theme-mode="light"] #chat,
+[theme-mode="light"] [class^="SettingGroup"],
+[theme-mode="light"] [class^="MainContainer"],
+[theme-mode="light"] [class^="MainContent"] {
+    background-color: var(--aero-background-2);
+}
+
+[theme-mode="light"]
+    [class^="ProviderListContainer"]
+    + [class^="SettingContainer"] {
+    background: var(--aero-background-2) !important;
+}
+
+[theme-mode="dark"] #chat,
+[theme-mode="dark"] [class^="SettingGroup"],
+[theme-mode="dark"] [class^="MainContainer"],
+[theme-mode="dark"] [class^="MainContent"] {
+    background-color: var(--aero-background-1);
+}
+
+[theme-mode="dark"]
+    [class^="ProviderListContainer"]
+    + [class^="SettingContainer"] {
+    background: var(--aero-background-1) !important;
+}
+
+/* Modal/tooltip surfaces: solid, high contrast */
+[theme-mode="light"] [class^="ant-modal"],
+[theme-mode="light"] #root[style*="background: var(--color-white)"],
+[theme-mode="light"] [class^="WindowFrame"],
+[theme-mode="light"] .ant-tooltip-inner {
+    --color-white: #ffffff;
+    --color-white-soft: #f2f2f2;
+    --color-white-mute: #e0e0e0;
+
+    --color-background: var(--color-white);
+    --color-background-soft: var(--color-white-soft);
+    --color-background-mute: var(--color-white-mute);
+
+    --ant-modal-content-bg: var(--aero-background-solid);
+}
+[theme-mode="dark"] [class^="ant-modal"],
+[theme-mode="dark"] [class^="WindowFrame"],
+[theme-mode="dark"] .ant-tooltip-inner {
+    --color-black: var(--rh-black);
+    --color-black-soft: var(--rh-black-2);
+    --color-black-mute: var(--rh-black-3);
+
+    --color-background: var(--color-black);
+    --color-background-soft: var(--color-black-soft);
+    --color-background-mute: var(--color-black-mute);
+
+    --ant-modal-content-bg: var(--aero-background-solid);
+}
+
+.bubble .message-user,
+[class^="ant"] {
+    --color-black: var(--rh-black);
+    --color-black-soft: var(--rh-black-2);
+    --color-black-mute: var(--rh-black-3);
+    --color-white: #ffffff;
+    --color-white-soft: #f2f2f2;
+    --color-white-mute: #e0e0e0;
+
+    --chat-text-user: var(--color-black);
+}
+
+/* Windows quick assistant background fixes, solid */
+body[theme-mode="light"][os="windows"] {
+    --color-background: #ffffff;
+    --color-background-opacity: #f2f2f2;
+}
+body[theme-mode="dark"][os="windows"] {
+    --color-background: var(--rh-black-2);
+    --color-background-opacity: var(--rh-black-2);
+}
+
+/* Quick panel */
+[class^="QuickPanelBody"] {
+    background-color: var(--aero-background-3) !important;
+}
+
+/* Drawer/search surfaces */
+#root[style*="background: var(--color-background)"],
+.ant-drawer-content[style*="background-color: var(--color-background)"],
+[class^="SearchBarContainer"] {
+    background: var(--aero-background-solid) !important;
+}
+
+/* Markdown content cleanup */
+.markdown [class^="Container"] [class^="Header"] + [class^="Content"] {
+    background: transparent;
+}
+
+/* Sharp corners across common components (Ant + custom) */
+[class^="ant"],
+.ant-btn,
+.ant-input,
+.ant-select,
+.ant-select-selector,
+.ant-modal,
+.ant-modal-content,
+.ant-popover,
+.ant-tooltip,
+.ant-card,
+.ant-drawer,
+.ant-drawer-content,
+.ant-segmented,
+.ant-radio-button-wrapper,
+.ant-tabs,
+.ant-tabs-nav,
+.ant-tabs-tab,
+.ant-switch,
+.ant-tag,
+.ant-badge,
+.ant-avatar,
+.ant-dropdown,
+#inputbar,
+.system-prompt,
+[class^="CardContent"],
+[class^="ServerCard"] {
+    border-radius: var(--radius-0) !important;
+}
+
+/* Borders: clean, subtle; Dark mode stronger contrast */
+[theme-mode="light"] .ant-card,
+[theme-mode="light"] .ant-modal-content,
+[theme-mode="light"] .ant-drawer-content,
+[theme-mode="light"] .ant-select-selector,
+[theme-mode="light"] .ant-input,
+[theme-mode="light"] .ant-btn {
+    border: 1px solid var(--rh-border);
+}
+[theme-mode="dark"] .ant-card,
+[theme-mode="dark"] .ant-modal-content,
+[theme-mode="dark"] .ant-drawer-content,
+[theme-mode="dark"] .ant-select-selector,
+[theme-mode="dark"] .ant-input,
+[theme-mode="dark"] .ant-btn {
+    border: 1px solid var(--rh-border-dark);
+}
+
+/* Focus/active states with red accents */
+.ant-btn:focus,
+.ant-btn:active,
+.ant-input:focus,
+.ant-select-focused .ant-select-selector,
+.ant-radio-button-wrapper-checked,
+.ant-segmented-item-selected {
+    outline: 2px solid var(--rh-red);
+    outline-offset: 0;
+    box-shadow: none !important;
+}
+
+/* Primary actions in Red Hat red */
+.ant-btn-primary,
+.ant-radio-button-wrapper-checked,
+.ant-segmented-item-selected {
+    background: var(--rh-red);
+    border-color: var(--rh-red);
+    color: #ffffff;
+}
+.ant-btn-primary:hover {
+    background: var(--rh-red-accent);
+    border-color: var(--rh-red-accent);
+}
+
+/* Links in red, with clear hover */
+a,
+.ant-typography a {
+    color: var(--rh-red);
+}
+a:hover,
+.ant-typography a:hover {
+    color: var(--rh-red-accent);
+    text-decoration: underline;
+}
+
+/* Hover states: subtle gray in light, darker in dark */
+[theme-mode="light"] .ant-btn:hover,
+[theme-mode="light"] .ant-select-selector:hover,
+[theme-mode="light"] .ant-input:hover {
+    background: #f2f2f2;
+}
+[theme-mode="dark"] .ant-btn:hover,
+[theme-mode="dark"] .ant-select-selector:hover,
+[theme-mode="dark"] .ant-input:hover {
+    background: var(--rh-gray-1);
+}
+
+/* Tabs and segmented controls: flat, bordered */
+.ant-tabs-tab {
+    border: 1px solid transparent;
+}
+.ant-tabs-tab:hover {
+    border-color: var(--rh-border);
+}
+[theme-mode="dark"] .ant-tabs-tab:hover {
+    border-color: var(--rh-border-dark);
+}
+.ant-tabs-ink-bar {
+    background: var(--rh-red);
+}
+
+/* Badges/Tags: sharp, red variants */
+.ant-tag-red,
+.ant-badge-status-error,
+.ant-badge-count {
+    background: var(--rh-red) !important;
+    border-color: var(--rh-red) !important;
+    color: #c7c7c7 !important;
+}
+
+/* List items hover */
+[class*="ListItem"],
+[class^="TopicListItem"] {
+    transition:
+        background-color 0.12s ease,
+        border-color 0.12s ease;
+}
+[theme-mode="light"] [class*="ListItem"]:hover,
+[theme-mode="light"] [class^="TopicListItem"]:hover {
+    background: #f6f6f6;
+}
+[theme-mode="dark"] [class*="ListItem"]:hover,
+[theme-mode="dark"] [class^="TopicListItem"]:hover {
+    background: var(--rh-gray-1);
+}
+
+/* Inputs placeholder contrast */
+[theme-mode="light"] ::placeholder {
+    color: #a3a3a3;
+}
+[theme-mode="dark"] ::placeholder {
+    color: #c7c7c7;
+}
+
+/* Scrollbars minimal, squared */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--rh-gray-2) transparent;
+}
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+    background: var(--rh-gray-2);
+    border-radius: 0;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--rh-gray-3);
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 0;
+}
+
+/* Section headers / dividers */
+hr,
+.ant-divider,
+[class*="SectionHeader"] {
+    border-color: var(--rh-border);
+}
+[theme-mode="dark"] hr,
+[theme-mode="dark"] .ant-divider,
+[theme-mode="dark"] [class*="SectionHeader"] {
+    border-color: var(--rh-border-dark);
+}
+
+/* Message bubbles: flat */
+.bubble .message-user {
+    background: var(--aero-background-1);
+    border: 1px solid var(--rh-border);
+}
+[theme-mode="dark"] .bubble .message-user {
+    border-color: var(--rh-border-dark);
+}
+
+/* Selection color with red accent */
+::selection {
+    background: var(--rh-red-weak);
+    color: #151515;
+}
+[theme-mode="dark"] ::selection {
+    background: #5f0000;
+    color: #fff;
+}

@@ -1,0 +1,423 @@
+/* Red Hat Inspired Theme (Flat, High Contrast, Red/Black/White) */
+
+/* Base palette */
+:root {
+    /* Brand reds */
+    --red-10: #fce3e3;
+    --red-50: #ee0000;
+    --purple-80: #1b0d33;
+    --interaction-blue-50: #0066cc;
+
+    /* Neutrals */
+    --white: #ffffff;
+    --gray-10: #f2f2f2;
+    --gray-20: #e0e0e0;
+    --gray-30: #c7c7c7;
+    --gray-40: #a3a3a3;
+    --gray-50: #707070;
+    --gray-60: #4d4d4d;
+    --gray-70: #383838;
+    --gray-80: #292929;
+    --gray-95: #151515;
+
+    /* Spacing radii: sharp edges */
+    --radius: 2;
+    --radius-0: 0;
+
+    /* Overwrite previous fills to remove beiges/transparency bias */
+    --fill-1: rgba(0 0 0 / 0.05);
+    --fill-2: rgba(0 0 0 / 0.08);
+    --fill-3: rgba(0 0 0 / 0.12);
+
+    --color-black: var(--gray-95);
+    --color-black-soft: var(--gray-95);
+    --color-black-mute: var(--gray-80);
+
+    --color-white: var(--white);
+    --color-white-soft: var(--gray-10);
+    --color-white-mute: var(--gray-20);
+
+    --color-list-item: var(--fill-1);
+    --color-list-item-hover: var(--fill-2);
+}
+
+/* LIGHT MODE */
+body[theme-mode="light"] {
+    /* Flat white surfaces, no glass */
+    --aero-background-1: var(--white);
+    --aero-background-2: #fafafa;
+    --aero-background-3: var(--gray-10);
+    --aero-background-solid: var(--white);
+
+    --navbar-background: var(--white);
+    --navbar-background-mac: var(--white);
+
+    --ant-select-selector-bg: var(--aero-background-1);
+    --ant-color-bg-container: var(--aero-background-1);
+    --ant-segmented-item-selected-bg: var(--aero-background-3);
+    --ant-button-default-bg: var(--aero-background-1);
+    --ant-radio-button-bg: var(--aero-background-1);
+}
+
+/* DARK MODE */
+body[theme-mode="dark"] {
+    /* Deep dark surfaces */
+    --aero-background-1: var(--gray-95);
+    --aero-background-2: var(--gray-80);
+    --aero-background-3: var(--gray-80);
+    --aero-background-solid: var(--gray-95);
+
+    --ant-select-selector-bg: var(--aero-background-1);
+    --ant-color-bg-container: var(--aero-background-1);
+    --ant-segmented-item-selected-bg: var(--aero-background-3);
+    --ant-button-default-bg: var(--aero-background-1);
+    --ant-radio-button-bg: var(--aero-background-1);
+}
+
+/* New window backgrounds */
+[class^="PageContainer"] {
+    background-color: var(--aero-background-solid) !important;
+}
+
+/* System background hints (reduced translucency) */
+@media (prefers-color-scheme: dark) {
+    body[theme-mode="light"] {
+        background: var(--white);
+    }
+}
+@media (prefers-color-scheme: light) {
+    body[theme-mode="dark"] {
+        background: var(--gray-95);
+    }
+}
+
+/* Content areas */
+[theme-mode="light"] #content-container,
+[theme-mode="light"] .minapp-drawer .ant-drawer-body {
+    background-color: var(--aero-background-2);
+}
+[theme-mode="dark"] #content-container,
+[theme-mode="dark"] .minapp-drawer .ant-drawer-body {
+    background-color: var(--aero-background-1);
+}
+
+.home-tabs,
+[class^="ProgramSection"],
+[class^="IconSection"],
+#messages,
+[class^="SettingContainer"] {
+    background-color: transparent;
+}
+
+[class^="TopicListItem"] .menu {
+    background-color: transparent !important;
+}
+
+#inputbar,
+.system-prompt,
+[class^="CardContent"],
+[class^="ServerCard"] {
+    background-color: var(--aero-background-1);
+    border: 1px solid var(--gray-20);
+}
+[theme-mode="dark"] #inputbar,
+[theme-mode="dark"] .system-prompt,
+[theme-mode="dark"] [class^="CardContent"],
+[theme-mode="dark"] [class^="ServerCard"] {
+    border-color: var(--gray-80);
+}
+
+[theme-mode="light"] #chat,
+[theme-mode="light"] [class^="SettingGroup"],
+[theme-mode="light"] [class^="MainContainer"],
+[theme-mode="light"] [class^="MainContent"] {
+    background-color: var(--aero-background-2);
+}
+
+[theme-mode="light"]
+    [class^="ProviderListContainer"]
+    + [class^="SettingContainer"] {
+    background: var(--aero-background-2) !important;
+}
+
+[theme-mode="dark"] #chat,
+[theme-mode="dark"] [class^="SettingGroup"],
+[theme-mode="dark"] [class^="MainContainer"],
+[theme-mode="dark"] [class^="MainContent"] {
+    background-color: var(--aero-background-1);
+}
+
+[theme-mode="dark"]
+    [class^="ProviderListContainer"]
+    + [class^="SettingContainer"] {
+    background: var(--aero-background-1) !important;
+}
+
+/* Modal/tooltip surfaces: solid, high contrast */
+[theme-mode="light"] [class^="ant-modal"],
+[theme-mode="light"] #root[style*="background: var(--color-white)"],
+[theme-mode="light"] [class^="WindowFrame"],
+[theme-mode="light"] .ant-tooltip-inner {
+    --color-white: var(--white);
+    --color-white-soft: var(--gray-10);
+    --color-white-mute: var(--gray-20);
+
+    --color-background: var(--color-white);
+    --color-background-soft: var(--color-white-soft);
+    --color-background-mute: var(--color-white-mute);
+
+    --ant-modal-content-bg: var(--aero-background-solid);
+}
+[theme-mode="dark"] [class^="ant-modal"],
+[theme-mode="dark"] [class^="WindowFrame"],
+[theme-mode="dark"] .ant-tooltip-inner {
+    --color-black: var(--gray-95);
+    --color-black-soft: var(--gray-95);
+    --color-black-mute: var(--gray-80);
+
+    --color-background: var(--color-black);
+    --color-background-soft: var(--color-black-soft);
+    --color-background-mute: var(--color-black-mute);
+
+    --ant-modal-content-bg: var(--aero-background-solid);
+}
+
+.bubble .message-user,
+[class^="ant"] {
+    --color-black: var(--gray-95);
+    --color-black-soft: var(--gray-95);
+    --color-black-mute: var(--gray-80);
+    --color-white: var(--white);
+    --color-white-soft: var(--gray10);
+    --color-white-mute: var(--gray20);
+
+    --chat-text-user: var(--color-black);
+}
+
+/* Windows quick assistant background fixes, solid */
+body[theme-mode="light"][os="windows"] {
+    --color-background: var(--white);
+    --color-background-opacity: var(--white);
+}
+body[theme-mode="dark"][os="windows"] {
+    --color-background: var(--gray-95);
+    --color-background-opacity: var(--gray-95);
+}
+
+/* Quick panel */
+[class^="QuickPanelBody"] {
+    background-color: var(--aero-background-3) !important;
+}
+
+/* Drawer/search surfaces */
+#root[style*="background: var(--color-background)"],
+.ant-drawer-content[style*="background-color: var(--color-background)"],
+[class^="SearchBarContainer"] {
+    background: var(--aero-background-solid) !important;
+}
+
+/* Markdown content cleanup */
+.markdown [class^="Container"] [class^="Header"] + [class^="Content"] {
+    background: transparent;
+}
+
+/* Sharp corners across common components (Ant + custom) */
+[class^="ant"],
+.ant-btn,
+.ant-input,
+.ant-select,
+.ant-select-selector,
+.ant-modal,
+.ant-modal-content,
+.ant-popover,
+.ant-tooltip,
+.ant-card,
+.ant-drawer,
+.ant-drawer-content,
+.ant-segmented,
+.ant-radio-button-wrapper,
+.ant-tabs,
+.ant-tabs-nav,
+.ant-tabs-tab,
+.ant-switch,
+.ant-tag,
+.ant-badge,
+.ant-avatar,
+.ant-dropdown,
+#inputbar,
+.system-prompt,
+[class^="CardContent"],
+[class^="ServerCard"] {
+    border-radius: var(--radius) !important;
+}
+
+/* Borders: clean, subtle; Dark mode stronger contrast */
+[theme-mode="light"] .ant-card,
+[theme-mode="light"] .ant-modal-content,
+[theme-mode="light"] .ant-drawer-content,
+[theme-mode="light"] .ant-select-selector,
+[theme-mode="light"] .ant-input,
+[theme-mode="light"] .ant-btn {
+    border: 1px solid var(--gray-20);
+}
+[theme-mode="dark"] .ant-card,
+[theme-mode="dark"] .ant-modal-content,
+[theme-mode="dark"] .ant-drawer-content,
+[theme-mode="dark"] .ant-select-selector,
+[theme-mode="dark"] .ant-input,
+[theme-mode="dark"] .ant-btn {
+    border: 1px solid var(--gray-80);
+}
+
+/* Focus/active states with red accents */
+.ant-btn:focus,
+.ant-btn:active,
+.ant-input:focus,
+.ant-select-focused .ant-select-selector,
+.ant-radio-button-wrapper-checked,
+.ant-segmented-item-selected {
+    outline: 2px solid var(--red-50);
+    outline-offset: 0;
+    box-shadow: none;
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--red-50);
+    outline: none;
+    border-color: var(--red-50);
+    box-shadow: none !important;
+}
+
+/* Primary actions in Red Hat red */
+.ant-btn-primary,
+.ant-radio-button-wrapper-checked,
+.ant-segmented-item-selected {
+    background: var(--red-50);
+    border-color: var(--red-50);
+    color: var(--white);
+}
+.ant-btn-primary:hover {
+    background: var(--red-50);
+    border-color: var(--red-50);
+}
+
+/* Links in red, with clear hover */
+a,
+.ant-typography a {
+    color: var(--gray-80) !important;
+}
+a:hover,
+.ant-typography a:hover {
+    color: var(--red-50) !important;
+    text-decoration: underline;
+    border-radius: var(--radius) !important;
+}
+
+/* Hover states: subtle gray in light, darker in dark */
+[theme-mode="light"] .ant-btn:hover,
+[theme-mode="light"] .ant-select-selector:hover,
+[theme-mode="light"] .ant-input:hover {
+    background: var(--gray-10);
+}
+[theme-mode="dark"] .ant-btn:hover,
+[theme-mode="dark"] .ant-select-selector:hover,
+[theme-mode="dark"] .ant-input:hover {
+    background: var(--gray-80);
+}
+
+/* Tabs and segmented controls: flat, bordered */
+.ant-tabs-tab {
+    border: 1px solid transparent;
+}
+.ant-tabs-tab:hover {
+    border-color: var(--gray-20);
+}
+[theme-mode="dark"] .ant-tabs-tab:hover {
+    border-color: var(--gray-80);
+}
+.ant-tabs-ink-bar {
+    background: var(--red-50);
+}
+
+/* Badges/Tags: sharp, red variants */
+.ant-tag-red,
+.ant-badge-status-error,
+.ant-badge-count {
+    background: var(--red-50) !important;
+    border-color: var(--red-50) !important;
+    color: var(--white) !important;
+}
+
+/* List items hover */
+[class*="ListItem"],
+[class^="TopicListItem"] {
+    transition:
+        background-color 0.12s ease,
+        border-color 0.12s ease;
+}
+[theme-mode="light"] [class*="ListItem"]:hover,
+[theme-mode="light"] [class^="TopicListItem"]:hover {
+    background: var(--gray-10);
+}
+[theme-mode="dark"] [class*="ListItem"]:hover,
+[theme-mode="dark"] [class^="TopicListItem"]:hover {
+    background: var(--gray-80);
+}
+
+/* Inputs placeholder contrast */
+[theme-mode="light"] ::placeholder {
+    color: var(--gray-40);
+}
+[theme-mode="dark"] ::placeholder {
+    color: var(--gray-40);
+}
+
+/* Scrollbars minimal, squared */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-70) transparent;
+}
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+    background: var(--gray-70);
+    border-radius: 2;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-50);
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 2;
+}
+
+/* Section headers / dividers */
+hr,
+.ant-divider,
+[class*="SectionHeader"] {
+    border-color: var(--gray-20);
+}
+[theme-mode="dark"] hr,
+[theme-mode="dark"] .ant-divider,
+[theme-mode="dark"] [class*="SectionHeader"] {
+    border-color: var(--gray-80);
+}
+
+/* Message bubbles: flat */
+.bubble .message-user {
+    background: var(--aero-background-1);
+    border: 1px solid var(--gray-20);
+}
+[theme-mode="dark"] .bubble .message-user {
+    border-color: var(--gray-80);
+}
+
+/* Selection color with red accent */
+::selection {
+    background: var(--red-10);
+    color: var(--gray-95);
+}
+[theme-mode="dark"] ::selection {
+    background: #5f0000;
+    color: var(--white);
+}

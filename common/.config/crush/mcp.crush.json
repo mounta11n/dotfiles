@@ -1,0 +1,14 @@
+{
+    "$schema": "https://charm.land/crush.json",
+    "mcp": {
+        "fetch": {
+            "type": "stdio",
+            "command": "bun",
+            "args": ["/Users/yazan/AI-Stuff/mcp/fetch-mcp/dist/index.js"]
+        },
+        "streaming-service": {
+            "type": "sse",
+            "url": "https://mcp.deepwiki.com/sse"
+        }
+    }
+}

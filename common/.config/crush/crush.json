@@ -1,0 +1,63 @@
+{
+    "providers": {
+        "lmstudio": {
+            "name": "llama.cpp",
+            "base_url": "http://localhost:8315/v1/",
+            "api_key": "$LLAMACPP_API_KEY",
+            "type": "openai",
+            "models": [
+                {
+                    "name": "Qwen-3.5 35B",
+                    "id": "qwen-35b",
+                    "context_window": 131072,
+                    "default_max_tokens": 16384
+                },
+                {
+                    "name": "GPT-OSS",
+                    "id": "gpt-oss",
+                    "context_window": 131072,
+                    "default_max_tokens": 16384
+                },
+                {
+                    "name": "Qwen Next",
+                    "id": "qwen-next",
+                    "context_window": 131072,
+                    "default_max_tokens": 16384
+                },
+                {
+                    "name": "Nemotron Cascade",
+                    "id": "nemotron-cascade",
+                    "context_window": 131072,
+                    "default_max_tokens": 16384
+                }
+            ]
+        }
+    },
+    "mcp": {
+        "fetch": {
+            "type": "stdio",
+            "command": "bun",
+            "args": ["/Users/yazan/AI-Stuff/mcp/fetch-mcp/dist/index.js"]
+        },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "/Users/yazan/mcp-memory.jsonl"
+      }
+    },
+    
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+    }
+}

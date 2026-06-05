@@ -1,0 +1,46 @@
+# ===================================================
+# bat config — ~/.config/bat/config
+# ===================================================
+
+# -- Theme -------------------------------------------
+--theme="Nord"
+--squeeze-blank
+--squeeze-limit 3
+
+# -- Style --------------------------------------------
+# default, auto, full, plain, numbers, header,
+# header-filename, changes, grid, rule, snip
+#--style="numbers,changes,rule,snip"
+--style="plain"
+
+# -- Farben ------------------------------------------
+# auto, always, never
+--color="auto"
+
+# -- Kursivschrift -----------------------------------
+# always, never
+--italic-text="always"
+
+# -- Paging (Seitenweise Ausgabe) --------------------
+# Optionen: auto, never, always
+--paging="never"
+
+# -- Zeilenlänge & Wrapping --------------------------
+# 0 = kein Umbruch (horizontal scrollen)
+--wrap="auto"
+
+# -- Trennlinie zwischen Dateien ---------------------
+--decorations="always"
+
+# -- Tabulator-Breite --------------------------------
+# --tabs=4
+
+# -- Git-Änderungen anzeigen -------------------------
+# --diff
+# --diff-context=5
+
+# -- Syntax-Mappings ---------------------------------
+--map-syntax="*.txt:C"
+--map-syntax="*.ini:C"
+
+

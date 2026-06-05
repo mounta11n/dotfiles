@@ -1,0 +1,83 @@
+
+
+# ----- Flags -------------
+[flags]
+rate = "0.75s"
+default_time_value = "60s"
+dot_marker = false
+disable_click = false
+disable_keys = false
+basic = false
+expanded = false
+show_table_scroll_position = false
+tree = false
+whole_word = false
+case_sensitive = false
+hide_time = true
+no_write = true
+default_widget_type = "proc"
+temperature_type = "celsius"
+battery = false
+memory_legend = "none"
+hide_avg_cpu = false
+cpu_left_legend = false
+network_use_bytes = true
+network_legend = "none"
+
+
+
+# ----- Style -------------
+[styles]
+theme = "nord"
+
+[styles.widgets]
+border_color = "blue"
+selected_border_color = "lightcyan"
+widget_title = "#d8dee9"
+
+[styles.graphs]
+graph_color = "#d8dee9"
+
+[styles.cpu]
+all_entry_color = "white"
+avg_entry_color = "yellow"
+cpu_core_colours = ["green", "green", "cyan", "magenta", "red", "red", "red", "#d08770", "#d08770", "#d08770"]
+
+[styles.memory]
+swap_color = "darkgray"
+ram_color = "lightcyan"
+
+
+
+# ----- Temperature -------------
+[temperature]
+default_sort = "Temp"
+
+[temperature.sensor_filter]
+is_list_ignored = true
+list = []
+regex = false
+case_sensitive = false
+whole_word = false
+
+
+
+# ----- Layout -------------
+[[row]]
+  ratio=3
+  [[row.child]]
+    ratio=8
+    type="memory"
+[[row]]
+  ratio=5
+  [[row.child]]
+    ratio=3
+    type="temperature"
+  [[row.child]]
+    ratio = 8
+    type="cpu"
+[[row]]
+  ratio=8
+  [[row.child]]
+    type="processes"
+

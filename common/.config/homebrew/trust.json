@@ -1,0 +1,14 @@
+{
+  "trustedformulae": [
+    "cirruslabs/cli/softnet",
+    "cirruslabs/cli/tart",
+    "erickochen/purple/purple"
+  ],
+  "trustedtaps": [
+    "antoniorodr/memo",
+    "cormacrelf/tap",
+    "ggerganov/ggerganov",
+    "multica-ai/tap",
+    "steipete/tap"
+  ]
+}

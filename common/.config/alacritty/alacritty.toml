@@ -1,0 +1,24 @@
+# nice themes argonaut, ayu_dark, baitong, bluish, breeze, catpuccin_latte, Cobalt2, cyber_punk_neon, dawnfox, dayfox
+# doom_one, dracula,  dracula_plus, flat_remix, gotham, hyper, inferno, iterm, monokai, monokai_charcoal, monokai_pro
+# night_owl, nord, nord_light, omni, one_dark, one_light, palenight, papercolor_dark, papercolor_light, 
+# pencil_dark, pencil_light, rainbow, selenized_dark, seoul256-light, thelovelace, vscode
+#    "~/.config/alacritty/themes/themes/nord.toml"
+
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/tokyo_night_light.toml"
+]
+live_config_reload = true
+
+[font]
+# Normale Schriftart
+normal = { family = "MesloLGS NF", style = "Regular" }
+size = 13.0
+
+#[window.opacity]
+#background_opacity = 0.95
+
+[window.padding]
+x = 32
+y = 8
+

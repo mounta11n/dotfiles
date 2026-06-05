@@ -1,0 +1,12 @@
+# Apple Container Runtime Config
+# https://github.com/apple/container
+
+[container]
+# Standard-Ressourcen pro Container
+cpus = 1
+memory = "2gb"
+
+[build]
+# Builder Container (für image builds)
+cpus = 1
+memory = "2gb"

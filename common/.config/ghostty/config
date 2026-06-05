@@ -1,0 +1,50 @@
+config-file = keymaps.conf
+
+theme = dark:Nordfox,light:Nord Light
+
+font-family = Iosevka Term
+font-size = 13
+font-thicken = true
+
+shell-integration = zsh
+title-report = true
+clipboard-read = allow
+copy-on-select = true
+
+window-theme = system
+window-padding-x = 48
+window-padding-y = 8
+window-padding-balance = true
+
+scrollbar = never
+unfocused-split-opacity = 1
+split-divider-color = #4c566b
+minimum-contrast = 1
+
+foreground = #eceff4
+background = #2e3440
+background-opacity = 1.0
+background-opacity-cells = false
+background-blur = true
+
+cursor-color = #eceff4
+cursor-text = #2e3440
+cursor-style = bar
+cursor-style-blink = true
+
+mouse-hide-while-typing = false
+mouse-scroll-multiplier = 3
+focus-follows-mouse = false
+
+macos-applescript = true
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = left
+macos-window-buttons = hidden
+macos-shortcuts = allow
+
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = #d8dee9
+macos-icon-screen-color = #4b566a
+
+shell-integration-features = ssh-env,ssh-terminfo

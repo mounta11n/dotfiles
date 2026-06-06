@@ -1,0 +1,19 @@
+[tools]
+node = "latest"
+npm = "latest"
+
+
+[env]
+MISE_INSTALLED_STATUS = 'true'
+
+
+[settings]
+activate_aggressive = true
+auto_install = true
+cache_prune_age = "30d"
+experimental = true
+idiomatic_version_file_enable_tools = ["npm", "node"]
+jobs = 8
+not_found_auto_install = true
+quiet = true
+status.show_tools = true

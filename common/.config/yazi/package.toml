@@ -1,0 +1,59 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "4ffa48f"
+hash = "384464b6df8cb807425c521f8cd790f3"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mactag"
+rev = "4ffa48f"
+hash = "235256b396f4da77ff8f5b8eacd7c113"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "4ffa48f"
+hash = "eff8ff12fa4e5f035a10d8aeeb4c258d"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "4ffa48f"
+hash = "7a4b4237223aaa94e589d1c01a23542a"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "4ffa48f"
+hash = "77e20b071404f97c09d3f9afdb9482e0"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-paste"
+rev = "4ffa48f"
+hash = "3f8d49413bc8691b4c652eb417a20178"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "4ffa48f"
+hash = "c887903a63a2ff520081b6d90a4b3392"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "406ce6c"
+hash = "f5afc904d5106ee368c8aa2ded43bd74"
+
+[[plugin.deps]]
+use = "uhs-robert/sshfs"
+rev = "e487f07"
+hash = "d202c6aae8adf370815a2a3d888d23dc"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "179ebf6"
+hash = "57056b9728006881d580ccabe8154a9c"
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-dark"
+rev = "25d28ce"
+hash = "8e6dd7e42a127173e4535993d3e0e393"
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-light"
+rev = "1b1e677"
+hash = "a80630a255909a511aba8a98d115bc15"

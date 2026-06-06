@@ -1,0 +1,137 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '''
+
+
+[┌─](bg2 bold)$hostname$username$container$fill$cmd_duration
+[└─](bg2 bold)$directory$git_branch$git_status
+$conda$character$jobs'''
+
+palette = 'yazan_nord'
+
+[palettes.yazan_nord]
+# Aurora
+red       = "#bf616a"
+orange    = "#d08770"
+yellow    = "#ebcb8b"
+green     = "#a3be8c"
+magenta   = "#b48ead"
+
+# Frost
+teal      = "#8fbcbb"
+cyan      = "#88c0d0"
+blue1     = "#81a1c1"
+blue2     = "#5e81ac"
+
+# Snow Storm
+text      = "#eceff4"
+subtext1  = "#e5e9f0"
+subtext2  = "#d8dee9"
+
+# Polar Night
+black     = "#2e3440"
+bg1       = "#3b4252"
+bg2       = "#434c5e"
+bg3       = "#4c566a"
+
+[username]
+disabled = false
+show_always = true
+style_user = 'blue1 bold'
+style_root = 'red bold'
+format = '[╼\[[ $user ]($style)\]╾](bg3)'
+aliases = { "yazan" = "jason" }
+
+[hostname]
+disabled = false
+ssh_only = true
+ssh_symbol = 'ssh '
+format = '[╼\[[ ssh ](bold green)[$hostname ](teal)\]╾─](bg3)'
+detect_env_vars = ['SSH_CONNECTION', 'LLAMACPP_API_KEY']
+
+[directory]
+disabled = false
+format = '[╼\[[ $path ]($style)[\]](bg3)[$read_only]($read_only_style)](bg3)'
+style = "fg:blue1 bold"
+use_logical_path = false
+substitutions = [
+  { from = "^/", to = "<root>", regex = true },
+  { from = "/", to = " ❯ " },
+  { from = "^<root>", to = "/", regex = true },
+  { from = "~", to = "〜" },
+]
+
+[fill]
+disabled = false
+symbol = '┄'
+style = 'bg3'
+
+[conda]
+disabled = false
+style = "cyan"
+format = '[\[[ $environment ]($style)\]╾─╼](bg3)'
+
+[cmd_duration]
+disabled = false
+min_time = 1000
+show_milliseconds = false
+format = '[╼\[[ $duration ]($style)\]](bg3)'
+style = 'blue1'
+show_notifications = false
+
+[container]
+disabled = false
+format = '[$symbol \[$name\]]($style) '
+
+[jobs]
+disabled = false
+symbol = '+ '
+number_threshold = 1
+symbol_threshold = 5
+format = '[$number$symbol]($style) '
+style = 'yellow'
+
+[character]
+disabled = false
+success_symbol = '[⫸ ](bg3)'
+error_symbol = "[⫸ ](red)"
+vimcmd_symbol = "[⫷ ](green)"
+
+[git_branch]
+disabled = false
+always_show_remote = false
+format = '[╾─╼\[[ $symbol$branch ]($style)\]](bg3)'
+symbol = ' '
+style = 'teal'
+truncation_length = 13
+truncation_symbol = ''
+ignore_branches = ['']
+
+[git_status]
+disabled = false
+style = 'bg3'
+conflicted = ' [⋭](yellow)'
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+up_to_date = '[🗹](green)'
+untracked = ' [〇](yellow)'
+stashed = ' [⊆](yellow)'
+modified = '[M](yellow)'
+staged = '[++\($count\)](green)'
+renamed = ' [renamed](yellow)'
+deleted = ' [🗵](orange)'
+worktree_added = ""
+worktree_deleted = ""
+worktree_modified = ""
+worktree_typechanged = ""
+# format = '([\[$all_status$ahead_behind\]]($style))'
+
+# [git_commit]
+# format = '\[[\($hash$tag\)]($style)\]'
+
+# [git_metrics]
+# format = '\[[+$added]($added_style)\]\[[-$deleted]($deleted_style)\]'
+
+# [git_state]
+# format = '\[[$state ($progress_current/$progress_total)]($style)\]'

@@ -1,0 +1,138 @@
+{
+    "copyright": {
+        "prefix": "copyright",
+        "body": [
+            "Copyright (c) ${CURRENT_YEAR} ${0:Author}. All Rights Reserved."
+        ],
+        "description": "Snippet to put copyright"
+    },
+    "diso": {
+        "prefix": "diso",
+        "body": [
+            "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+        ],
+        "description": "ISO date time stamp"
+    },
+    "date": {
+        "prefix": "date",
+        "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"],
+        "description": "Put the date in (Y-m-D) format"
+    },
+    "dateDMY": {
+        "prefix": "dateDMY",
+        "body": ["${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}"],
+        "description": "Put date in (DD/MM/YY) format"
+    },
+    "dateMDY": {
+        "prefix": "dateMDY",
+        "body": ["${CURRENT_MONTH}/${CURRENT_DATE}/${CURRENT_YEAR}"],
+        "description": "Put the date in (m/D/Y) format"
+    },
+    "time": {
+        "prefix": "time",
+        "body": ["${CURRENT_HOUR}:${CURRENT_MINUTE}"],
+        "description": "I give you back the time (H:M)"
+    },
+    "timeHMS": {
+        "prefix": "timeHMS",
+        "body": ["${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"],
+        "description": "I give you back the time (H:M:S)"
+    },
+    "datetime": {
+        "prefix": "datetime",
+        "body": [
+            "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}"
+        ],
+        "description": "I give you back the time and date (Y-m-d H:M)"
+    },
+    "uuid": {
+        "prefix": "uuid",
+        "body": "${UUID}",
+        "description": "A Version 4 UUID"
+    },
+    "Console log": {
+        "prefix": "cl",
+        "body": "console.log($1)$0",
+        "description": "console.log()"
+    },
+    "Arrow function": {
+        "prefix": "fn",
+        "body": "($1) => ${2:$0}",
+        "description": "Arrow function"
+    },
+    "If statement": {
+        "prefix": "if",
+        "body": "if ($1) {\n\t$0\n}",
+        "description": "if block"
+    },
+    "If/else": {
+        "prefix": "ife",
+        "body": "if ($1) {\n\t$2\n} else {\n\t$0\n}",
+        "description": "if/else block"
+    },
+    "For loop": {
+        "prefix": "for",
+        "body": "for ($1; $2; $3) {\n\t$0\n}",
+        "description": "for loop"
+    },
+    "For each": {
+        "prefix": "fe",
+        "body": "for ($1 of $2) {\n\t$0\n}",
+        "description": "for...of loop"
+    },
+    "For in": {
+        "prefix": "fi",
+        "body": "for ($1 in $2) {\n\t$0\n}",
+        "description": "for...in loop"
+    },
+    "While loop": {
+        "prefix": "wh",
+        "body": "while ($1) {\n\t$0\n}",
+        "description": "while loop"
+    },
+    "Try/catch": {
+        "prefix": "try",
+        "body": "try {\n\t$1\n} catch (e) {\n\t$0\n}",
+        "description": "try/catch block"
+    },
+    "Import": {
+        "prefix": "im",
+        "body": "import { $1 } from \"$2\"$0",
+        "description": "import statement"
+    },
+    "Import default": {
+        "prefix": "imd",
+        "body": "import $1 from \"$2\"$0",
+        "description": "import default"
+    },
+    "Export default": {
+        "prefix": "exd",
+        "body": "export default $1$0",
+        "description": "export default"
+    },
+    "Export named": {
+        "prefix": "exn",
+        "body": "export { $1 }$0",
+        "description": "export named"
+    },
+    "Function": {
+        "prefix": "fun",
+        "body": "function ${1:name}(${2:args}) {\n\t$0\n}",
+        "description": "function definition"
+    },
+    "Class": {
+        "prefix": "class",
+        "body": "class ${1:Name} {\n\tconstructor(${2:args}) {\n\t\t$0\n\t}\n}",
+        "description": "class definition"
+    },
+    "Shebang": {
+        "prefix": "sh",
+        "body": "#!/usr/bin/env ${1:bash}\n$0",
+        "description": "Shebang line"
+    },
+    "Main guard": {
+        "prefix": "main",
+        "body": "if __name__ == \"__main__\":\n\t$0",
+        "description": "Python main guard"
+    }
+}

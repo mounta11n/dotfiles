@@ -1,5 +1,5 @@
 # ———————————————————————————————
-#  path.zsh — PATH & Directories
+#  path.sh — PATH & Directories
 # ———————————————————————————————
 
 path_prepend() {
@@ -25,9 +25,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/.go"
 
 # ——— Custom Paths ———
-export MY_DOT_FILES_DIR="$HOME/.config/shell"
-export MY_SECRET_VAULT_DIR="$HOME/.local/share/secrets"
-export LLAMA_ARG_MODELS_DIR="$HOME/models/llama-server-models"
+export SHELL_CONFIG_DIR="$HOME/.config/shell"
 export MY_LLM_MODELS_DIR="$HOME/models/llm"
 export MY_STT_MODELS_DIR="$HOME/models/stt"
 export MY_TTS_MODELS_DIR="$HOME/models/tts"

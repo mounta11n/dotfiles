@@ -1,5 +1,16 @@
 .DS_Store
 *.swp
 *.stow
-secrets.zsh
-.local/share/secrets/
+
+# Lokale Env-Overrides (geräte-/situationsspezifisch)
+env.*.local
+
+# Entschlüsselte Secrets (Plaintext – nie committen!)
+# Die verschlüsselte .age-Version ist bewusst im Repo.
+secrets.sh
+*.dec
+*.key
+
+# lokale Backups & temporäre Daten
+.backup/
+*.bak*

@@ -8,4 +8,7 @@ compinit
 zstyle ':completion:*' menu select
 
 # Llama completion (bash compat)
-source "$MY_DOT_FILES_DIR/completions.d/llama-completion.bash"
+source "$SHELL_CONFIG_DIR/completions.d/llama-completion.bash"
+
+# bun completions
+[ -s "$HOME/.oh-my-zsh/completions/_bun" ] && source "$HOME/.oh-my-zsh/completions/_bun"

@@ -13,6 +13,3 @@ source <(fzf --zsh)
 
 # mise (dev tools version manager)
 eval "$(/Users/yazan/.local/bin/mise activate zsh)"
-
-# bun completions
-[ -s "/Users/yazan/.oh-my-zsh/completions/_bun" ] && source "/Users/yazan/.oh-my-zsh/completions/_bun"

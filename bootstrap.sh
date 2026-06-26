@@ -85,6 +85,8 @@ if [[ -d "$DOTFILES_DIR" ]]; then
     info "Führe stow aus..."
     cd "$DOTFILES_DIR"
     git pull --rebase 2>/dev/null || true
+    # Oh-My-Zsh legt ein eigenes .zshrc an → entfernen vor stow
+    [[ -f "$HOME/.zshrc" ]] && [[ ! -L "$HOME/.zshrc" ]] && rm -f "$HOME/.zshrc"
     stow --restow common linux
     info "Symlinks gesetzt."
 else

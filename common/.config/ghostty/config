@@ -12,8 +12,8 @@ clipboard-read = allow
 copy-on-select = true
 
 window-theme = system
-window-padding-x = 48
-window-padding-y = 8
+window-padding-x = 24
+window-padding-y = 4
 window-padding-balance = true
 
 scrollbar = never

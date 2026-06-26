@@ -42,3 +42,6 @@ unset _local_env
 
 # kimi-code
 export PATH="/Users/yazan/.kimi-code/bin:$PATH"
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+export PATH="$HOME/.local/bin:$PATH"

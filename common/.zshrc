@@ -41,7 +41,7 @@ unset _local_env
 [ -f "$HOME/.lrc/env" ] && source "$HOME/.lrc/env"
 
 # kimi-code
-export PATH="/Users/yazan/.kimi-code/bin:$PATH"
+export PATH="$HOME/.kimi-code/bin:$PATH"
 
 # Hermes Agent — ensure ~/.local/bin is on PATH
 export PATH="$HOME/.local/bin:$PATH"
